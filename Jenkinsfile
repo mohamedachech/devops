@@ -8,7 +8,7 @@ pipeline {
                 git branch: 'main',
                 url : 'https://github.com/mohamedachech/devops.git'
             }
-                  stage('sehli') {
+        stage('sehli') {
             steps {
                 echo 'sehli 7awi'
             }
