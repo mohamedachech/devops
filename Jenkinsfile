@@ -8,14 +8,14 @@ pipeline {
                 url : 'https://github.com/mohamedachech/devops.git'
             }
         }
-        stage('Test') { 
+        stage('build') { 
             steps {
-                echo 'test'
+                mvn clean install
             }
         }
-        stage('Deploy') { 
+        stage('test') { 
             steps {
-                echo 'deploying'
+                mvn test
             }
         }
     }
