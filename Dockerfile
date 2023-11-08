@@ -5,7 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY /tn/esprit/DevOps_Project/1.0jar  /opt/devops.jar
+COPY . .
 
 # Expose the port your Spring Boot application will run on
 EXPOSE 8080
