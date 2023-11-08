@@ -1,4 +1,9 @@
 pipeline {
+        environment { 
+        registry = "maamoun1925/devops-backend" 
+        registryCredential = 'dockerhub_id' 
+        dockerImage = '' 
+    }
     agent any 
     stages {
         stage('Git Checkout') { 
@@ -23,5 +28,27 @@ pipeline {
                 sh 'mvn deploy'
             }
         }
+    
+        stage('Building our image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                }
+            } 
+        }
+        stage('Deploy our image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        } 
+        stage('Cleaning up') { 
+            steps { 
+                sh "docker rmi $registry:$BUILD_NUMBER" 
+            }
+        } 
     }
 }
