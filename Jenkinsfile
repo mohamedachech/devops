@@ -48,8 +48,8 @@ pipeline {
                 
         } 
         stage("Docker-compose") {
-		steps{
-                     sh 'docker-compose up -d'
+	    steps{
+                sh 'echo $PATH'
                 }
          }    
         stage('Cleaning up') { 
